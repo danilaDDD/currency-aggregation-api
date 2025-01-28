@@ -1,0 +1,17 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+
+spring:
+  application:
+    name: currency-aggregation-service
+  profiles:
+    active: ${PROFILE:local}
+
+server:
+  port: 8083
+
+app:
+  kafka:
+    currency-keys-topic:${CURRENCY-KEYS-TOPIC:jfund-currency-keys}

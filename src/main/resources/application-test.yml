@@ -1,0 +1,21 @@
+eureka:
+  client:
+    enabled: false
+
+spring:
+  data:
+    mongodb:
+      host: ${DB_HOST:localhost}
+      port: ${DB_PORT:27017}
+      database: ${DB_NAME_TEST:jfundTestCurrencyAggregationDB}
+      password: ${DB_PASSWORD_TEST:float123}
+      username: ${DB_USER_TEST:jfundAdmin}
+      authentication-database: admin
+
+app:
+#  scheduler disabled for tests
+  scheduler:
+    enabled: false
+  kafka:
+    server: ${KAFKA_SERVER:localhost:9092}
+    currency-values-topic: ${CURRENCY_VALUES_TOPIC:jfund-currency-values}
