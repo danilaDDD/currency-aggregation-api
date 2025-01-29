@@ -16,6 +16,8 @@ app:
 #  scheduler disabled for tests
   scheduler:
     enabled: false
+    handle-change-currency-values: ${HANDLE_CHANGE_CURRENCY_VALUES_CRON:* * * * * */10}
+    create-candles: ${CREATE_CANDLES_CRON:* * * * * */10}
   kafka:
     server: ${KAFKA_SERVER:localhost:9092}
     currency-values-topic: ${CURRENCY_VALUES_TOPIC:jfund-currency-values}

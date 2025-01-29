@@ -1,9 +1,14 @@
 package com.jfund.currencyaggregationsservice.consumer;
 
+import com.jfund.currencyaggregationsservice.service.ChangeCurrencyValuesEventService;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
+@Slf4j
 @Component
+@RequiredArgsConstructor
 public class CurrencyValuesConsumer {
     /**
      *  @param currencyValuesString:
@@ -13,8 +18,14 @@ public class CurrencyValuesConsumer {
      * "changedDateTime":[2025,1,29,19,22,2,564000000]
      * }
      */
+
+    private final ChangeCurrencyValuesEventService changeCurrencyValuesEventService;
+
     @KafkaListener(topics = "${app.kafka.currency-values-topic}", groupId = "currency-values-group")
     public void listenCurrencyValues(String currencyValuesString) {
-        System.out.println("Received currency values: " + currencyValuesString);
+        changeCurrencyValuesEventService
+                .consume(currencyValuesString)
+                .doOnError(e -> log.error("Error consuming currency values", e))
+                .subscribe();
     }
 }
