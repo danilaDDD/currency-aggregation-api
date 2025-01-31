@@ -26,6 +26,10 @@ public class ChangeCurrencyValuesEvent {
         this(id, values, dateTime, false);
     }
 
+    public ChangeCurrencyValuesEvent(List<CurrencyValue> values, LocalDateTime dateTime) {
+       this(null, values, dateTime, false);
+    }
+
     @Override
     public boolean equals(Object object) {
         if (this == object) return true;

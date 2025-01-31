@@ -4,6 +4,7 @@ import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Getter
@@ -17,10 +18,11 @@ public class CurrencyPeriod {
     private String id;
     private String label;
     private Long seconds;
+    private LocalDateTime startDateTime;
     private boolean actual;
 
-    public CurrencyPeriod(String label, Long seconds) {
-       this(null, label, seconds, true);
+    public CurrencyPeriod(String label, Long seconds, LocalDateTime startDateTime) {
+       this(null, label, seconds, startDateTime, false);
     }
 
     @Override

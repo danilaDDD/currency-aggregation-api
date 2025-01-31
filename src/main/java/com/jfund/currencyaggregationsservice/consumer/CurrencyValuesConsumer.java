@@ -1,6 +1,6 @@
 package com.jfund.currencyaggregationsservice.consumer;
 
-import com.jfund.currencyaggregationsservice.service.ChangeCurrencyValuesEventService;
+import com.jfund.currencyaggregationsservice.service.ChangeCurrencyValuesEventConsumer;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -19,11 +19,11 @@ public class CurrencyValuesConsumer {
      * }
      */
 
-    private final ChangeCurrencyValuesEventService changeCurrencyValuesEventService;
+    private final ChangeCurrencyValuesEventConsumer changeCurrencyValuesEventConsumer;
 
     @KafkaListener(topics = "${app.kafka.currency-values-topic}", groupId = "currency-values-group")
     public void listenCurrencyValues(String currencyValuesString) {
-        changeCurrencyValuesEventService
+        changeCurrencyValuesEventConsumer
                 .consume(currencyValuesString)
                 .doOnError(e -> log.error("Error consuming currency values", e))
                 .subscribe();
