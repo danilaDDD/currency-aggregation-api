@@ -139,10 +139,6 @@ class ApplyChangeValuesEventServiceTest {
                 .verifyComplete();
     }
 
-
-
-
-
     @Test
     void testAppend_WhenEventWithNotNullValuesAndNotExistCurrencyPeriods_ThenThrowApplyChangeValuesEventException(){
         ChangeCurrencyValuesEvent event = new ChangeCurrencyValuesEvent(
