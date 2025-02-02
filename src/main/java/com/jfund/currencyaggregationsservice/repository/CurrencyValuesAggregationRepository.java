@@ -5,8 +5,14 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 import reactor.core.publisher.Flux;
 
+import java.time.LocalDateTime;
+
 public interface CurrencyValuesAggregationRepository
         extends ReactiveMongoRepository<CurrencyValuesAggregation, String> {
 
-    Flux<CurrencyValuesAggregation> findAllByOrderByMinDateTimeAscMaxDateTimeAsc();
+    Flux<CurrencyValuesAggregation> findAllByStatus(CurrencyValuesAggregation.Status status);
+
+    Flux<CurrencyValuesAggregation> findByMinDateTimeLessThanEqualAndMaxDateTimeGreaterThanEqualAndStatus(
+            LocalDateTime minDateTime, LocalDateTime maxDateTime,
+            CurrencyValuesAggregation.Status status);
 }

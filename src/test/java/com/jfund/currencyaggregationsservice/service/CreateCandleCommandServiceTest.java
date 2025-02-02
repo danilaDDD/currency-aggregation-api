@@ -6,7 +6,7 @@ import org.springframework.test.context.ActiveProfiles;
 
 @SpringBootTest
 @ActiveProfiles("test")
-class CreateCandleServiceTest {
+class CreateCandleCommandServiceTest {
 
         @Test
         void testCreateCandle_WhenAggregationWithValuesFillingWholePeriod_ThenCreateSuccessfully() {

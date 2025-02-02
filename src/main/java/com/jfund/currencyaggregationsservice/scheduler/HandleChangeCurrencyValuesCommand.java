@@ -1,7 +1,6 @@
-package com.jfund.currencyaggregationsservice.runner;
+package com.jfund.currencyaggregationsservice.scheduler;
 
-import com.jfund.currencyaggregationsservice.service.AppendChangeValuesEventService;
-import com.jfund.currencyaggregationsservice.service.ChangeCurrencyValuesEventConsumer;
+import com.jfund.currencyaggregationsservice.service.ApplyChangeValuesEventService;
 import com.jfund.currencyaggregationsservice.service.ChangeCurrencyValuesEventService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -10,15 +9,15 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class HandleChangeCurrencyValues implements Runnable {
-    private final AppendChangeValuesEventService appendChangeValuesEventService;
+public class HandleChangeCurrencyValuesCommand implements Runnable {
+    private final ApplyChangeValuesEventService applyChangeValuesEventService;
     private final ChangeCurrencyValuesEventService changeCurrencyValuesEventService;
 
     @Override
     public void run() {
         changeCurrencyValuesEventService
                 .getActualEvents()
-                .flatMap(appendChangeValuesEventService::append)
+                .flatMap(applyChangeValuesEventService::apply)
                 .doOnError(e -> log.error("Error while handling change currency values", e))
                 .subscribe();
     }

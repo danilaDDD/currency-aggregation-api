@@ -22,7 +22,7 @@ public class CurrencyPeriod {
     private boolean actual;
 
     public CurrencyPeriod(String label, Long seconds, LocalDateTime startDateTime) {
-       this(null, label, seconds, startDateTime, false);
+       this(null, label, seconds, startDateTime, true);
     }
 
     @Override

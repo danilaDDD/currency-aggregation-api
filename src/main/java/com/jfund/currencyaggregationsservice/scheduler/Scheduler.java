@@ -1,6 +1,5 @@
 package com.jfund.currencyaggregationsservice.scheduler;
 
-import com.jfund.currencyaggregationsservice.runner.HandleChangeCurrencyValues;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
@@ -11,7 +10,8 @@ import org.springframework.scheduling.annotation.Scheduled;
 @EnableScheduling
 @RequiredArgsConstructor
 public class Scheduler {
-    private final HandleChangeCurrencyValues handleChangeCurrencyValues;
+    private final HandleChangeCurrencyValuesCommand handleChangeCurrencyValuesCommand;
+    private final CreateCandleCommand createCandleCommand;
 
     @Value("${app.scheduler.enabled}")
     private boolean enabled;
@@ -19,12 +19,12 @@ public class Scheduler {
     @Scheduled(cron = "${app.scheduler.handle-change-currency-values}")
     public void handedChangeValues(){
         if(enabled)
-            handleChangeCurrencyValues.run();
+            handleChangeCurrencyValuesCommand.run();
     }
 
     @Scheduled(cron = "${app.scheduler.create-candles}")
     public void createCandles(){
         if(enabled)
-            handleChangeCurrencyValues.run();
+            createCandleCommand.run();
     }
 }
