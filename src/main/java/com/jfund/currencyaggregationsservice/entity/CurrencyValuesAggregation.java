@@ -18,7 +18,7 @@ import java.util.Objects;
 @AllArgsConstructor
 @ToString
 @Document
-public class CurrencyValuesAggregation {
+public class CurrencyValuesAggregation implements Cloneable {
     @Id
     private String id;
     private String currencyKey;
@@ -46,13 +46,26 @@ public class CurrencyValuesAggregation {
         if (object == null || getClass() != object.getClass()) return false;
         CurrencyValuesAggregation that = (CurrencyValuesAggregation) object;
         return Objects.equals(currencyKey, that.currencyKey) &&
+                Objects.equals(status, that.status) &&
                 Objects.equals(minDateTime.withNano(0), that.minDateTime.withNano(0)) &&
                 Objects.equals(maxDateTime.withNano(0), that.maxDateTime.withNano(0));
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(currencyKey, minDateTime.withNano(0), maxDateTime.withNano(0));
+        return Objects.hash(currencyKey, status,
+                minDateTime.withNano(0), maxDateTime.withNano(0));
+    }
+
+    @Override
+    public CurrencyValuesAggregation clone() {
+        try {
+            CurrencyValuesAggregation clone = (CurrencyValuesAggregation) super.clone();
+            // TODO: copy mutable state here, so the clone can't change the internals of the original
+            return clone;
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
     }
 
     public static enum Status{

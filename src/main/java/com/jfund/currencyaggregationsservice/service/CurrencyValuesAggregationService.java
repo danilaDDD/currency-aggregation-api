@@ -31,4 +31,8 @@ public class CurrencyValuesAggregationService {
     public Flux<CurrencyValuesAggregation> saveAll(List<CurrencyValuesAggregation> aggregations) {
         return repository.saveAll(aggregations);
     }
+
+    public Flux<CurrencyValuesAggregation> findNewLessAndEqualsMaxDateTime(LocalDateTime dateTime) {
+        return repository.findByMaxDateTimeLessThanEqualAndStatus(dateTime, CurrencyValuesAggregation.Status.NEW);
+    }
 }

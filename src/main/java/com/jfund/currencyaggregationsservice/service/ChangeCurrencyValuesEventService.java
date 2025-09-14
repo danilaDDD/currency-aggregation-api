@@ -42,4 +42,8 @@ public class ChangeCurrencyValuesEventService {
             throw new SaveChangeCurrencyValuesEventException("Values contain duplicates");
         }
     }
+
+    public Mono<ChangeCurrencyValuesEvent> getLastChangeValuesEvent() {
+        return repository.findFirstByOrderByDateTimeDesc();
+    }
 }

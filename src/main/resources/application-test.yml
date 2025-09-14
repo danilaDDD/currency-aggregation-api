@@ -15,9 +15,10 @@ spring:
 app:
 #  scheduler disabled for tests
   scheduler:
-    enabled: false
-    handle-change-currency-values: ${HANDLE_CHANGE_CURRENCY_VALUES_CRON:* * * * * */10}
-    create-candles: ${CREATE_CANDLES_CRON:* * * * * */10}
+    enabled: ${SCHEDULER_ENABLED:false}
+    handle-change-currency-values: ${HANDLE_CHANGE_CURRENCY_VALUES_CRON:* * * * * */3}
+    check-aggregation-filling: ${CHECK_AGGREGATION_FILLING_CRON:* * * * * */3}
+    create-candles: ${CREATE_CANDLES_CRON:* * * * * */3}
   kafka:
     server: ${KAFKA_SERVER:localhost:9092}
     currency-values-topic: ${CURRENCY_VALUES_TOPIC:jfund-currency-values}

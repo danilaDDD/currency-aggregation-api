@@ -15,4 +15,8 @@ public interface CurrencyValuesAggregationRepository
     Flux<CurrencyValuesAggregation> findByMinDateTimeLessThanEqualAndMaxDateTimeGreaterThanEqualAndStatus(
             LocalDateTime minDateTime, LocalDateTime maxDateTime,
             CurrencyValuesAggregation.Status status);
+
+    Flux<CurrencyValuesAggregation> findByMaxDateTimeLessThanEqualAndStatus(
+            LocalDateTime dateTime,
+            CurrencyValuesAggregation.Status status);
 }

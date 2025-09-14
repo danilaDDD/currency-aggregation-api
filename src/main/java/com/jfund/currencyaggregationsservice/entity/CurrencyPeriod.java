@@ -20,9 +20,10 @@ public class CurrencyPeriod {
     private Long seconds;
     private LocalDateTime startDateTime;
     private boolean actual;
+    private Long minCountValues;
 
     public CurrencyPeriod(String label, Long seconds, LocalDateTime startDateTime) {
-       this(null, label, seconds, startDateTime, true);
+       this(null, label, seconds, startDateTime, true, 5L);
     }
 
     @Override

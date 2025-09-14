@@ -11,7 +11,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 @RequiredArgsConstructor
 public class Scheduler {
     private final HandleChangeCurrencyValuesCommand handleChangeCurrencyValuesCommand;
-    private final CreateCandleCommand createCandleCommand;
+    private final CheckAggregationFillingCommand checkAggregationFillingCommand;
 
     @Value("${app.scheduler.enabled}")
     private boolean enabled;
@@ -22,9 +22,9 @@ public class Scheduler {
             handleChangeCurrencyValuesCommand.run();
     }
 
-    @Scheduled(cron = "${app.scheduler.create-candles}")
-    public void createCandles(){
+    @Scheduled(cron = "${app.scheduler.check-aggregation-filling}")
+    public void checkAggregationFilling(){
         if(enabled)
-            createCandleCommand.run();
+            checkAggregationFillingCommand.run();
     }
 }
